@@ -4,6 +4,7 @@
 #
 #  Project: Getting and Cleanning Data, creating a tidy dataset
 #  Author: Leard Fernandes
+
 tidy_data<-function(){
 	#Verify for the folder, if not exists, create it, otherwhise, continues
 	if(!file.exists("data")){
