@@ -1,12 +1,11 @@
 ## This script get and clean the UCI_HAR Dataset for the data scientist application
 #  The tidy data includes all variables from original dataset, because 
-#  this variables should be used in many applications e.g(forest randam, neural networksm, ...)
+#  this variables should be used in many applications e.g( random forest, neural networks, ...)
 #
 #  Project: Getting and Cleanning Data, creating a tidy dataset
 #  Author: Leard Fernandes
-
 tidy_data<-function(){
-	#Verify for the folder, if not exists, create it, otherwhise, continues
+	#Verify for the folder, if not exists, create it, otherwise, continues
 	if(!file.exists("data")){
 	  dir.create("./data")
 	}
@@ -15,18 +14,17 @@ tidy_data<-function(){
 
 	#Set URL for the file
 	fileUrl<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-	#download file
-	download.file(fileUrl, destfile="./data/UCI_HAR_Dataset.zip")
-
-	#unpack zip file
-	unzip("./data/UCI_HAR_Dataset.zip")
-
-	#End of Download and Pack
+	#download file, if not exists
+	if(!file.exists("data//UCI_HAR_Dataset.zip")){
+	  download.file(fileUrl, destfile="./data//UCI_HAR_Dataset.zip")
+	  #unpack zip file
+	  unzip("./data/UCI_HAR_Dataset.zip")
+	}	#End of Download and Pack
 
 	##Setting the column names
 
 	#data set for colunm names of X train and test
-	labels<-read.table("data/UCI HAR Dataset/features.txt") #load the dataset
+	labels<-read.table("data//UCI HAR Dataset//features.txt") #load the dataset
 	names(labels)<-c("id", "name") #Set column name
 
 	#formatting the columns names
@@ -60,20 +58,20 @@ tidy_data<-function(){
 
 	##Load the activities names for the descriptive variable activity
 	#activities Names
-	activities<-read.table("data/UCI HAR Dataset/activity_labels.txt") #load the dataset
+	activities<-read.table("data//UCI HAR Dataset//activity_labels.txt") #load the dataset
 	names(activities)<-c("id", "activity") #Set column name
 
 	##Read the DataSets
 
 	#read data Train 
-	subject_train<-read.table("data/UCI HAR Dataset/train/subject_train.txt")  #load the subject dataset
-	y_train<-read.table("data/UCI HAR Dataset/train/y_train.txt")  #load the y dataset
-	X_train<-read.table("data/UCI HAR Dataset/train/X_train.txt")  #load the X dataset
+	subject_train<-read.table("data//UCI HAR Dataset//train//subject_train.txt")  #load the subject dataset
+	y_train<-read.table("data//UCI HAR Dataset//train//y_train.txt")  #load the y dataset
+	X_train<-read.table("data//UCI HAR Dataset//train//X_train.txt")  #load the X dataset
 
 	#read data Test
-	subject_test<-read.table("data/UCI HAR Dataset/test/subject_test.txt")  #load the subject dataset
-	y_test<-read.table("data/UCI HAR Dataset/test/y_test.txt")  #load the y  dataset
-	X_test<-read.table("data/UCI HAR Dataset/test/X_test.txt")  #load the X dataset
+	subject_test<-read.table("data//UCI HAR Dataset//test//subject_test.txt")  #load the subject dataset
+	y_test<-read.table("data//UCI HAR Dataset//test//y_test.txt")  #load the y  dataset
+	X_test<-read.table("data//UCI HAR Dataset//test//X_test.txt")  #load the X dataset
 
 
 	##Configure the names of columns
@@ -141,7 +139,7 @@ tidy_data<-function(){
 	syx_tidy<-syx_tidy[order(syx_tidy$subject, syx_tidy$activity),]
 
 	#Save on file
-	write.csv(syx_tidy, "data/UCI_HAR_tydy_Dataset.txt")
+	write.table(syx_tidy, "data/UCI_HAR_tydy_Dataset.txt", row.names=FALSE)
 	syx_tidy
 }
 
